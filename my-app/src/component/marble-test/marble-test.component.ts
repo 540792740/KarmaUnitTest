@@ -20,7 +20,6 @@ export class MarbleTestComponent implements OnInit, OnDestroy {
   getProductData(){
     this.sub = this.marbaleTestService.getProductList().subscribe((products)=>{
       this.tempProductList = products;
-      
     });
   }
 
