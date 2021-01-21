@@ -98,14 +98,59 @@ describe("Test contain", ()=>{
         }
     }
     ```
-* By Testing Following Code
+* By Testing Following Codeca
     ```
         const person = new Person('John', 'Doe');
         person.fullName; -> call without ()
 
         const spy = spyOnProperty(person, 'fullName');
-        const spy = spyOnProperty(person, 'fullName','get').and.turnValue("return Value");
-
+        const spyGet = spyOnProperty(person, 'fullName','get').and.returnValue("return Value");
         const result = person.fullName;
         expect(spy).toHaveBeenCalled();
+
+        const spySet = spyOnProperty(person, 'fullName','set').and.callThrough();
+        person.fullName = "JW W";
+        expect(spy).toHaveBeenCalled();
+
+        
+    ```
+* Service
+    ```
+    spyOn
+        spyOn(authService,"checkAuthenticate");
+        spyOn(authService,"checkAuthenticate").and.returnValue(true);
+        let slip = component.getSalarySlip();
+        expect(authService.checkAuthenticate).toHaveBeenCalled();
+    
+    get
+        authService = TestBed.get(authService);
+        authService.barand.returnValue("Return Value");
+        const service : authService.get(authService);
+        expect(service.bar()).toBe("Return Value");
+
+    Mock Service:
+        1. const mockProductList = [{}];
+
+        2. let mockList = mockProductList;
+           let testService: MarbleTestService;
+
+        3. providers: [MarbleTestService]
+
+        4. testService = TestBed.get(MarbleTestService);
+
+        5.  it("testing subscription is called",fakeAsync(()=>{
+                let productSpy = spyOn(testService, "getProductList").and.returnValue(of(mockList));
+                let subSpy = spyOn(testService.getProductList(), "subscribe");
+                component.ngOnInit();
+                tick();
+                expect(productSpy).toHaveBeenCalledBefore(subSpy);
+                expect(subSpy).toHaveBeenCalled();
+            }));
+
+            it("testing execution within subscribe method",fakeAsync(()=>{
+                component.ngOnInit();
+                expect(component.tempProductList).toBeDefined();
+                expect(component.tempProductList.length).toBeGreaterThan(5);
+            }));
+
     ```
