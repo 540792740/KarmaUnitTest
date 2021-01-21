@@ -1,12 +1,12 @@
-import { waitForAsync, ComponentFixture, TestBed, ComponentFixtureAutoDetect, async}  from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed, ComponentFixtureAutoDetect}  from '@angular/core/testing';
 import {EmployeeComponent} from "./employee.component";
-import {AuthenticationService} from "./authentication";
+import {AuthenticationService} from "../Service/authentication.service";
 
 xdescribe("EmployeeComponent", ()=>{
     let component: EmployeeComponent;
     let fixture: ComponentFixture<EmployeeComponent>;
     let authService:AuthenticationService;
-    let h1 = HTMLElement;
+    // let h1 = HTMLElement;
 
     beforeEach(waitForAsync(()=>{
         TestBed.configureTestingModule({
@@ -17,20 +17,23 @@ xdescribe("EmployeeComponent", ()=>{
 
     beforeEach(()=>{
         fixture = TestBed.createComponent(EmployeeComponent);
+        // authService = TestBed.get(AuthenticationService);
         authService = TestBed.inject(AuthenticationService);
         // expect(authService.getSalarySlip()).toBe('real value');
         component = fixture.componentInstance;
-        h1 = fixture.nativeElement.querrySelector("h1");
+        // h1 = fixture.nativeElement.querrySelector("h1");
     });
 
     it("Should Create", ()=>{
         expect(component).toBeTruthy();
     });
 
-    it("should Assert Value h1 to be componnet.salSlip",()=>{
-        component.getSalarySlip();
-        fixture.detectChanges();
-        expect(h1).toContain(component.salSlip);
+    it("should Assert Value h1 to be componnet.salSli p",()=>{
+        spyOn(authService,"checkAuthenticate").and.returnValue(true);
+        let slip = component.getSalarySlip();
+        // fixture.detectChanges();
+        expect(slip).toContain("Slip");
+        expect(authService.checkAuthenticate).toHaveBeenCalled();
     })  
 
 

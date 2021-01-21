@@ -1,26 +1,30 @@
 import { Component, OnInit} from "@angular/core";
-import { AuthenticationService } from './authentication';
+import { AuthenticationService } from '../Service/authentication.service';
 
 @Component({
     selector:"app-employee",
-    templateUrl:"./employee.component.html"
+    templateUrl:"./employee.component.html",
+    styleUrls:["./employee.component.css"]
 })
 
 export class EmployeeComponent implements OnInit{
 
-    salSlip: string;
+    // salSlip: string;
     
     constructor(private authService: AuthenticationService){
         this.authService.authenticate();
-        this.salSlip = '';
+        // this.salSlip = '';
     }
     ngOnInit(){}
 
     getSalarySlip(){
-        if(this.authService.checkAuthentication()){
-            this.salSlip = "Salary Slip";
+        if(this.authService.checkAuthenticate()){
+            return "Salary Slip"
+            
+            // this.salSlip = "Salary Slip";
         } else {
-            this.salSlip = "No Authtication!"
+            console.log("No Authentication!");
+            // this.salSlip = "No Authtication!"
         }
     }
 }
