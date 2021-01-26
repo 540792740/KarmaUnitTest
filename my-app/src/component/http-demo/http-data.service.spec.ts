@@ -12,7 +12,7 @@ describe('HttpDataService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
-      providers: [HttpDataService]
+    providers: [HttpDataService]
   }));
 
   beforeEach(()=>{

@@ -128,7 +128,7 @@ describe("Test contain", ()=>{
         const service : authService.get(authService);
         expect(service.bar()).toBe("Return Value");
 
-    Mock Service:
+    Not HTTP, Mock Service:
         1. const mockProductList = [{}];
 
         2. let mockList = mockProductList;
@@ -152,5 +152,26 @@ describe("Test contain", ()=>{
                 expect(component.tempProductList).toBeDefined();
                 expect(component.tempProductList.length).toBeGreaterThan(5);
             }));
+    Subscribe
+        testService.getThreshold(myform.value).subscribe((res : any)=>{
+            expect(result).toBe(res,'Test');
+            expect(component.no_result).not.toBeTruthy();
+        });
 
     ```
+#### Private Method
+    ```
+        With Argument: 
+            let addSpy = spyOn<any>(component,"addition").and.callThrough();
+            component['addition'](12, 21);
+            expect(addSpy).toHaveBeenCalled();
+
+        Without Argument: 
+            let msgSpy = spyOn<any>(component,"setMsg").and.callThrough();
+            component['setMsg']();
+            expect(msgSpy).toHaveBeenCalled();
+    ```
+
+#### Open
+    ```spyOn(testService, 'open').and.returnValue(mockModalRef)```
+

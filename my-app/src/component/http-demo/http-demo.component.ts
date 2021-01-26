@@ -33,10 +33,12 @@ export class HttpDemoComponent implements OnInit {
   }
 
   public submitPost(){
-    let post: PostModel;
-    post.userId = 1;
-    post.title = this.postForm.controls['postTitle'].value;
-    post.body = this.postForm.controls.postBody.value;
+    let post: PostModel = {
+      "id": 1,
+      "userId": 1, 
+      "title": this.postForm.controls['postTitle'].value, 
+      "body" : this.postForm.controls.postBody.value
+    };
 
     this.httpDataService.addPost(post).subscribe((outputPost)=>{
       console.log(outputPost);

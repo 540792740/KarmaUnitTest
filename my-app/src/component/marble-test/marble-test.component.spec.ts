@@ -34,7 +34,7 @@ const mockProductList = [{
   "rating": 3
 }];
 
-fdescribe('MarbleTestComponent', () => {
+describe('MarbleTestComponent', () => {
   let component: MarbleTestComponent;
   let fixture: ComponentFixture<MarbleTestComponent>;
   let mockList = mockProductList;
