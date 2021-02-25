@@ -152,13 +152,14 @@ describe("Test contain", ()=>{
                 expect(component.tempProductList).toBeDefined();
                 expect(component.tempProductList.length).toBeGreaterThan(5);
             }));
-    Subscribe
-        testService.getThreshold(myform.value).subscribe((res : any)=>{
-            expect(result).toBe(res,'Test');
-            expect(component.no_result).not.toBeTruthy();
-        });
+    Subscribe:
+            let spy = spyOn(testService.getSubCategory(2), "subscribe").and.returnValue(val)
+            testService.getThreshold(myform.value).subscribe((res : any)=>{
+                expect(result).toBe(res,'Test');
+                expect(component.no_result).not.toBeTruthy();
+            });
 
-    ```
+        ```
 #### Private Method
     ```
         With Argument: 
@@ -175,3 +176,33 @@ describe("Test contain", ()=>{
 #### Open
     ```spyOn(testService, 'open').and.returnValue(mockModalRef)```
 
+#### Form
+    ```
+        component.itemSearchForm = new FormGroup({
+            categoryCode: new FormControl(''),
+            srsItemType: new FormControl(''),
+            subCategoryCode: new FormControl(''),
+            pluCode: new FormControl('',[Validators.pattern('[0-9 ]*')]),
+            itemDesc: new FormControl('', [Validators.pattern('[a-zA-Z0-9]*$')]),
+            upcCode: new FormControl('',[Validators.pattern('[0-9 ]*')]),
+            itemCode: new FormControl('',[Validators.pattern('[0-9 ]*')]),
+            items: new FormControl([],[Validators.pattern('[0-9 ]*')])
+        });
+
+    Test Case:
+        let productSpy = spyOn(component.newRecipeForm, "get").and.returnValue({"value":null});
+
+    ```
+
+#### New File()
+    ```
+        let content = "Hello Zip";
+        let data = new Blob([content], { type: 'application/zip' });
+        let arrayOfBlob = new Array<Blob>();
+        arrayOfBlob.push(data);
+        let applicationZip = new File(arrayOfBlob, "Mock.zip");
+    ```
+#### spy on error:
+    * let productSpy = spyOn(testService, "getProductList").and.returnValue(
+        Promise.reject({ message: 'failure' }
+    )
