@@ -12,9 +12,9 @@ describe('EventTestComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventTestComponent ]
+      declarations: [EventTestComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -29,24 +29,24 @@ describe('EventTestComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should "Add Clicks" button is clicked ', ()=>{
+  it('should "Add Clicks" button is clicked ', () => {
     const h1 = de.query(By.css('h1'));
     const btn = de.query(By.css('#btnAddClick'));
-    btn.triggerEventHandler('click',{});
+    btn.triggerEventHandler('click', {});
     fixture.detectChanges();
     expect(component.countClicks).toEqual(parseInt(h1.nativeElement.innerText));
   });
 
-  it("should sypon on the private method without parameters",()=>{
+  it("should sypon on the private method without parameters", () => {
     let msgSpy = spyOn<any>(component, "setMsg").and.callThrough();
     component['setMsg']();
     // msgSpy.call();
     expect(msgSpy).toHaveBeenCalled();
   });
-   
-  it("should sypon on the private method with parameters",()=>{
+
+  it("should sypon on the private method with parameters", () => {
     let addSpy = spyOn<any>(component, "addition").and.callThrough();
-    component['addition'](12,21);
+    component['addition'](12, 21);
     expect(addSpy).toHaveBeenCalled();
   })
 
